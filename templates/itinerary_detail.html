@@ -1,0 +1,67 @@
+{% extends "base.html" %} {% load static %} {% block title %} Itinerary Detail{% endblock title %} {% block content %}
+<!-- prague image part start -->
+<section>
+    
+    <div class="user-image prague-img " style="background:url('{{single_product.banner.url}}');background-repeat: no-repeat;background-size: cover;background-position: center center;">
+    </div>
+</section>
+<!-- prague image part end -->
+<!-- breadcrumb start  -->
+<section class="accordian_part">
+    <div class="container pt-3 d-flex justify-content-center align-items-center">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Itinerary Detail</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Order History</li> -->
+            </ol>
+        </nav>
+    </div>
+</section>
+<!-- breadcrumb end -->
+
+<!-- middle content start -->
+<section class="middle-prague py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+            <div class="col ">
+                <div class="middle3">
+                    <div class="heading-text">
+                        <h3 class="m-0">{{single_product.name}}-{{single_product.currency_code}}</h3>
+
+                        <h4 class="m-0"> ₹ {{single_product.price}}</h4>
+                    </div>
+                    <div class="green-txt">{{single_product.small_description}}</div>
+                    <div class="prague-para">
+                        <br>
+                        <p>Kindly check the best available transportation to reach <b> {{single_product.name}}</b> from your accommodation.<br> <br><b>{{single_product.name}} - </b>{{single_product.long_description|safe}}</p>
+                    </div>
+                    <!-- button part start -->
+                    <section>
+                        <div class="but-1 d-flex justify-content-center">
+                            <a href="{% url 'add_cart' single_product.id %}" class="btn btn-outline-success my-3 border-3 px-4 rounded-pill">Buy Now</a>
+                        </div>
+                        <div class="but-2 d-flex justify-content-center">
+                            <a href="{% url 'added_cart' single_product.id %}" class="btn btn-outline-success my-3 border-3 px-4 rounded-pill">add to cart</a>
+                        </div>
+                    </section>
+                    <!-- button part end -->
+                </div>
+            </div>
+            <div class="col">
+                <div class="middle4 px-2">
+                    <div class="card" style="width: auto; position: relative;">
+                        <span class="position-absolute package">{{single_product.package}}</span>
+                        <div class="card_img">
+                            <img src="{{single_product.image.url}}" class="img-fluid prd_det_img" alt=""> {% for list in image %} {% if list.post.id == single_product.id %}
+                            <img src="{{list.image.url}}" class="img-fluid prd_det_img" alt=""> {% endif %} {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- middle content end -->
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% load static %} {% block title %} Login {% endblock title %} {% block content %}
+    <!-- Main Content -->
+    <section class="section">
+        <div class="containers w-sm-100">
+            <div class="user signinBx">
+                <div class="imgBx"><img src="/static/images/login.png" alt="" /></div>
+                <div class="formBx">
+                    <form method='POST' action="{% url 'login' %}">
+                        <h2>Sign In</h2>
+                        {% csrf_token %}
+                        <input type="email" name="email" placeholder="Email Address" />
+                        <input type="password" name="password" placeholder="Password" />
+                        <p class="signup">
+                            <small><a href="{% url 'forgotpassword' %}"> Forgot Password ?</a></small>
+                        </p>
+                        <button type="submit" class="btn custm_bg2 btn-block">Login</button>
+                        <p class="signup mt-5">
+                            Don't have an account ?
+                            <small><a href="{% url 'register' %}">Sign Up here.</a></small>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+    </section>
+{% endblock content %}

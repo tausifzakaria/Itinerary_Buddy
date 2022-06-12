@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Cart
+{% endblock title %}
+{% block content %}
+    <!-- breadcrumb start  -->
+    <section class="accordian_part">
+        <div class="container pt-3 d-flex justify-content-center align-items-center">
+            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                 aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                    <!-- <li class="breadcrumb-item active" aria-current="page">Order History</li> -->
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <!-- breadcrumb end -->
+    <section class="my-3">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-md-2 justify-content-center align-items-start">
+                {% if not cart_items %}
+                    <div class="text-center p-5">
+                        <h2 class="text-center">Your Shopping Cart is Empty</h2>
+                        <a href="{% url 'home' %}" class="btn custm_bg2">Continue Shopping</a>
+                    </div>
+                {% else %}
+                    <div class="col-md-8 border-end">
+                        <div class="table-responsive">
+                            <table class="table w-100" style="vertical-align:middle;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Image</th>
+                                        <th scope="col">Product Detail</th>
+                                        <th scope="col">Product Price</th>
+                                        <th scope="col">Product Package</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cart_item in cart_items %}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ cart_item.product.image.url }}"
+                                                     width="80"
+                                                     height="80"
+                                                     class="img-fluid"
+                                                     alt="">
+                                            </td>
+                                            <td>
+                                                <h5>{{ cart_item.product.name }}</h5>
+                                            </td>
+                                            <td>
+                                                <div class="price_discount">
+                                                    <span>Itinerary Price : {{ cart_item.product.price }}</span>
+                                                </div>
+                                            </td>
+                                            <td>3D4N</td>
+                                            <td>
+                                                <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
+                                                   class="btn btn-danger border-0 float-end">Remove</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <table class="table w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Products</th>
+                                    <th scope="col" class="text-end">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart_item in cart_items %}
+                                    <tr>
+                                        <td>
+                                            <h6>{{ cart_item.product.name }}</h6>
+                                        </td>
+                                        <td>
+                                            <span class="float-end">{{ cart_item.product.price }}</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td class="border-0">
+                                        <h5>Total</h5>
+                                    </td>
+                                    <td class="border-0">
+                                        <h5 class="float-end">{{ total }}</h5>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-end">
+                            <a href="{% url 'checkout' %}" class="btn btn-dark custm_bg border-0">Pay Now</a>
+                            <a href="{% url 'home' %}" class="btn btn-dark custm_bg2 border-0">Continue Shopping</a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

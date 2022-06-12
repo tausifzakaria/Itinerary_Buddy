@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+</head>
+<style>
+body{
+    font-size:14px !important;
+}
+    .w-20{
+    width: 30%;
+}
+.mainimg{
+    object-fit: cover;
+    object-position: center center;
+}
+th, td {
+  padding: 2px 0px;
+}
+.text-start{
+    text-align:left;
+}
+.text-end{
+    text-align:right;
+}
+</style>
+<body>
+    <div class="container">
+        <table class="margin-3">
+            <thead>
+                {% for orders in order|slice:'1' %}
+                <tr>
+                    <th>
+                        <div class="col text-start"><img src="static/images/logo.jpg" alt=""></div>
+                    </th>
+                    <th>
+                        <div class="col text-end"><span>Hii {{orders.user.username}},<br>Here is Your Product Detail</span></div>
+                    </th>
+                </tr>
+                {% endfor %}
+            </thead>
+            <tbody class="border-top">
+                {% for orders in order %}
+                <tr>
+                    <td >
+                        <h5 class="mb-4"><span class="d-inline-block w-20">Product name </span><span class=>: {{orders.product.name}} </span></h5>
+                    </td>
+                    <td rowspan="5">
+                        <img src="{{orders.product.image.path}}" width="200" height="200" />
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <h5 class="my-4"><span class="d-inline-block w-20">Package </span><span class=>: {{orders.product.package}} </span></h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td >
+                        <h5 class="my-4"><span class="d-inline-block w-20">Continent </span><span class=>: {{orders.product.continent}} </span></h5>
+                    </td>
+                </tr> 
+                <tr> 
+                    <td >
+                        <h5 class="my-4"><span class="d-inline-block w-20">Country </span><span class=>: {{orders.product.country}} </span></h5>
+                    </td>
+                </tr>
+                <tr> 
+                    <td >
+                        <h5 class="my-4"><span class="d-inline-block w-20">State </span><span class=>: {{orders.product.state}} </span></h5>
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="2">
+                    <div class="row row-cols-1">
+                        <div class="col">
+                            <div class="my-5 lh-lg">{{orders.product.small_description}}</div>
+                            <div class="my-5 lh-lg">{{orders.product.long_description|safe}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</html>

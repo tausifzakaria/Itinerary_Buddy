@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% load static %} {% block title %} Register {% endblock title %} {% block content %}
+<section class="section">
+    <div class="containers">
+        <div class="user signinBx">
+            <div class="formBx">
+                <form method='POST' action="{% url 'register' %}">
+                    <h2>Create an account</h2>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label>Email</label> {{ form.email }}
+                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <!-- form-group end.// -->
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Username</label> {{ form.username }}
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Create password</label> {{ form.password }}
+                        </div>
+                        <!-- form-group end.// -->
+                        <div class="form-group">
+                            <label>Repeat password</label> {{ form.confirm_password }}
+                        </div>
+                        <!-- form-group end.// -->
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            {{form.captcha}}
+                        </div>
+                        <!-- form-group end.// -->
+                    </div>
+
+                    {% comment %} <div class="g-recaptcha" data-sitekey="6LdDi_gfAAAAAOyUxcKfr-PtWcybNIwuF-BqhJSZ"></div> {% endcomment %}
+                    <div class="form-group">
+                        <button type="submit" class="btn custm_bg2  btn-block"> Register  </button>
+                    </div>
+                    <p class="signup my-2">
+                        Already have an account ?
+                        <a href="{% url 'login' %}">Sign in here.</a>
+                    </p>
+                </form>
+            </div>
+            <div class="imgBx"><img src="/static/images/login.png" alt="" /></div>
+        </div>
+</section>
+{% endblock content %}

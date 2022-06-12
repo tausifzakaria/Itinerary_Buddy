@@ -1,0 +1,218 @@
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    .container {
+        width: 800px;
+    }
+
+    .padding-5 {
+        padding: 3% 0 !important;
+    }
+
+    .wrapper {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .border-right {
+        border-right: 1px solid #000;
+    }
+
+    .no-border {
+        border-bottom: 0;
+    }
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .padding-0 {
+        padding: 0;
+    }
+
+    img {
+        height: 30px;
+    }
+
+    .table {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+    }
+
+    tbody tr td {
+        border: 1px solid #000;
+        padding: 5px 0 5px 10px;
+        width: 50%;
+        border-collapse: collapse;
+    }
+
+    .first {
+        border-top: 0;
+    }
+
+    .last {
+        border-bottom: 0;
+    }
+
+    b {
+        display: block;
+    }
+
+    span {
+        font-size: 12px;
+    }
+
+    .invoice-bill {
+        width: 100%;
+    }
+
+    td {
+        border: 1px solid #000;
+        padding: 5px;
+        border-collapse: collapse;
+    }
+
+    .serial-no {
+        width: 70px;
+    }
+
+    .particulars {
+        width: 500px;
+    }
+
+    .amount {
+        width: 150px;
+    }
+
+    .particular-items {
+        padding: 5px 10px;
+    }
+
+    .amount-items {
+        padding: 5px 0;
+    }
+
+    .entry-id {
+        margin: 35px 0;
+    }
+
+    .bank-details {
+        margin-top: 30px;
+    }
+
+    .authorised-sign-wrapper {
+        width: 300px;
+        border: 1px solid #000;
+        padding: 5px 20px;
+    }
+    .fs-4, span{
+        font-size: 16px !important;
+    }
+    table tr td, table tr th{
+        font-size: 16px !important;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <img src='static/images/pdfbanner.png' style="width:100%;height:100%;">
+        <div class="wrapper entry-id">
+            <div class="row">
+                <div class="padding-5">
+                    <p class="fs-4">Itinerary Buddy<br />Contact : info@itinerarybuddy.com<br />Visit website : www.itinerarybuddy.com</p>
+                </div>
+                <div class="col-sm-7 padding-0">
+                    <table class="table" cellspacing="0" cellpadding="10">
+                        <tbody>
+                            {% for orders in order|slice:'1' %}
+                            <tr>
+                                <td>
+                                    <b>Mode/Terms of Payment</b>
+                                    <span>Online Payment</span>
+                                </td>
+                                <td>
+                                    <p class="m-0">Buyer: {{orders.user.username}}<br/>Email: {{orders.user.email}}<br />Number: {{orders.user.mobile}}</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row margin-0">
+                <div class="col-sm-7 padding-0">
+                    <table class="table">
+                        {% for orders in order|slice:'1' %}
+                        <tr>
+                            <td class="first b-left">
+                                <b>Buyer's Order No</b>
+                                <span>{{orders.order.order_number}}</span>
+                            </td>
+                            <td class="first">
+                                <b>Dated</b>
+                                <span>{{orders.created_at}}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="row margin-0">
+                <div class="col-sm-12 padding-0">
+                    <table class="invoice-bill">
+                        <tr>
+                            <td class="serial-no">
+                                <b>PRODUCT DETAIL</b>
+                            </td>
+                            <td class="particulars">
+                                <b>PACKAGE</b>
+                            </td>
+                            <td class="amount">
+                                <b>PRICE</b>
+                            </td>
+                        </tr>
+                        {% for orders in order %}
+                        <tr>
+                            <td>
+                                {{orders.product.name}}
+                            </td>
+                            <td>
+                                <p>
+                                    {{orders.product.package}}
+                                </p>
+                            </td>
+                            <td>
+                                <p>{{orders.product.price}}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% for orders in order|slice:'1' %}
+                        <tr>
+                            <td rowspan="2"></td>
+                            <td>
+                                <b>Tax</b>
+                            </td>
+                            <td>{{orders.order.tax}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Total</b>
+                            </td>
+                            <td>{{orders.order.order_total}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

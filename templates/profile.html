@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Profile
+{% endblock title %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/myprofile.css' %}">
+    <!-- carousel start -->
+    <section>
+        <div class="dashboard_img"><span class="about-txt"></span></div>
+    </section>
+    <!-- carousel end -->
+    <!-- breadcrumb start  -->
+    <section class="accordian_part">
+        <div class="container pt-3 d-flex justify-content-center align-items-center">
+            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+                 aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                    <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <!-- breadcrumb end -->
+    <!-- profile & table part start-->
+    <section class="profile_form">
+        <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-md-2  row_data">
+                <div class="col col-md-3 p-0">
+                    <div class="profile py-5 text-center ">
+                        {% if  userprofile.profile_pic %}
+                        <img class="profile-pic rounded-circle" width="150" height="150" style="object-fit:cover; object-position:center;" src="/media/{{userprofile.profile_pic}}">
+                        {% else %}
+                        <img class="profile-pic rounded-circle" width="150" height="150" style="object-fit:cover; object-position:center;" src="{% static 'images/profile.svg' %}">
+                        {% endif %}
+                        <h5 class="mt-3">Hello !</h5>
+                        <h3 class="fw-bold">{{ request.user }}</h3>
+                        <div class="profile_buttons">
+                            <div class="my_profile py-2">
+                                <a class="active" href="{% url 'profile' request.user %}">MY PROFILE</a>
+                            </div>
+                            <div class="order_history py-2">
+                                <a href="{% url 'dashboard' %}">ORDER HISTORY</a>
+                            </div>
+                        </div>
+                        <div class="image">
+                            <img class="img-fluid w-100"
+                                 src="{% static 'images/Airportgirl2.png' %}"
+                                 alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-9 p-0 my-5 py-5">
+                    <section class="table_detail">
+                        <div class="container">
+                            <div class="details my-3 ">
+                                <div class=" col d-inline-block mb-5">
+                                    <h1 class="border-bottom">Profile Information</h1>
+                                </div>
+                                <div class="content border-1 rounded bg-white p-5">
+                                    <div class="m-4 p-3 fs-5 border border-1 row  justify-content-center align-items-center">
+                                        <div class="col col-3">Username : </div><div class="col col-9">{{ userprofile.username }}</div>
+                                    </div>
+                                    <div class="m-4 p-3 fs-5 border border-1 row  justify-content-center align-items-center">
+                                        <div class="col col-3">Phone No :  </div><div class="col col-9">{{ userprofile.mobile }}</div>
+                                    </div>
+                                    <div class="m-4 p-3 fs-5 border border-1 row  justify-content-center align-items-center">
+                                        <div class="col col-3">Email :  </div><div class="col col-9">{{ userprofile.email }}</div>
+                                    </div>
+                                    <div class="m-4 p-3 fs-5 border border-1 row  justify-content-center align-items-center">
+                                        <div class="col col-3">Country :  </div><div class="col col-9">{{ userprofile.country }}</div>
+                                    </div>
+                                    <div class="m-4 p-3 fs-5 border border-1 row  justify-content-center align-items-center">
+                                        <div class="col col-3">Nationality : </div><div class="col col-9">{{ userprofile.nationality }}</div>
+                                    </div>
+                                    <div class="submit_btn text-end">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#profileModal" class="btn custm_bg2 float-right">Update Profile</button>
+                                    </div>
+
+                                    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form method="POST" action="{% url 'profile' userprofile.id %}" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                    {% csrf_token %}
+                                                    <div class="form-group mb-2">
+                                                        <label for="floatingInput">Name</label>
+                                                        {{profile_form.username}}
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <label for="floatingInput">Mobile</label>
+                                                        {{profile_form.email}}
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <label for="floatingInput">Email</label>
+                                                        {{profile_form.mobile}}
+                                                    </div>
+                                                    <div class="form-group mb-2 select_country">
+                                                        <label for="floatingInput">Country of residence</label>
+                                                        {{profile_form.country}}
+                                                    </div>
+                                                    <div class="form-group mb-2 select_nationality">
+                                                        <label for="floatingInput">Nationality</label>
+                                                        {{profile_form.nationality}}
+                                                    </div>
+                                                    <div class="form-group mb-2 select_nationality">
+                                                        <label for="floatingInput">Profile picture</label>
+                                                        {{profile_form.profile_pic}}
+                                                    </div>
+                                                
+                                                </div>
+                                                <div class="modal-footer p-1">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn custm_bg">Save changes</button>
+                                                </div>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>    
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- profile & table part end -->
+{% endblock content %}

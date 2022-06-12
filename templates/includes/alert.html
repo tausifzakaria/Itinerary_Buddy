@@ -1,0 +1,36 @@
+<style>
+.alert-success{
+    color: #ffffff;
+    background-color: rgb(40 54 116);
+    border-color: rgb(19 180 128);
+    border-left: 7px solid rgb(21 183 127) !important;
+    border: 2px solid rgb(40 54 116);
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    padding: 0.5rem 1rem;
+}
+.alert-error{
+    color: #ffffff;
+    background-color: rgb(255 0 0 / 92%);
+    border-color: #f8f9fa;
+    border-left: 7px solid #00cc66 !important;
+    border: 2px solid #dc3545;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    padding: 0.5rem 1rem;
+}
+</style>
+{% if messages %} {% for message in messages %}
+<div id="message" style="position: fixed;bottom: 2%;left: 0;z-index: 10;width: auto;" class="container">
+    <div{% if message.tags %} class="alert alert-{{ message.tags }} fs-6 fw-bold" {% endif %} role="alert">
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} ERROR:{% endif %} {{ message }}</li>
+        {% endfor %}
+</div>
+</div>
+{% endif %}
+
+<script>
+    setTimeout(function() {
+    document.getElementById("message").style = "display:none;";
+}, 5000); 
+</script>

@@ -1,0 +1,142 @@
+{% extends "base.html" %} {% load static %} {% block title %} Home {% endblock title %} {% block content %}
+<!-- carousel area start -->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for i in banner %}
+        <div class="carousel-item {% if forloop.first %} active {% endif %} ">
+            <img src="{{i.image.url}}" class="d-block w-100" alt="...">
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+</div>
+<!-- carousel area end -->
+<!-- home section card start -->
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-md-2 justify-content-center align-items-center">
+        <div class="col">
+            {% comment %} {% if 'search' in request.path %} {% endcomment %}
+            <form method="GET" action="{% url 'search' %}" class="search">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded-pill me-2" name="keyword" placeholder="Search for destination" aria-label="Username" aria-describedby="basic-addon1">
+                    <div class="input-group-append">
+                        <button class="input-group-text rounded-circle custm_bg text-white p-2" type="submit" id="basic-addon1"><i
+                            class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
+            <div class="row row-cols-2 my-2 row-cols-md-2 justify-content-center align-items-center">
+                <div class="col">
+                    <div class="dropdown">
+                        <select class="form-select w-100 rounded-pill custm_bg text-white" id="drpcontinent">
+                            <option selected disabled>Select Continent</option>
+                            {% for i in continents %}
+                            <option value="{{i}}">{{i}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary text-start rounded-pill custm_bg text-white w-100 dropdown-toggle form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Select Country
+                            </button>
+                        <ul class="dropdown-menu w-100 custm_bg" id="drpcountry" aria-labelledby="dropdownMenuButton1">
+                            {% for c_list in countries %}
+                            <li class="{{c_list.continent.continent_name}} ddcnt"><a href="{{c_list.get_url_country}}" class="dropdown-item countryhover text-white">{{c_list.country_name}}</a>
+                                {% for list in city %}
+                                {% if c_list.id == list.country.id %}
+                                <ul class="dropdown-submenu dropdown-menu custm_bg">
+                                    <li><a href="{{list.get_url_city}}" class="text-white">{{list.city_name}}</a></li>
+                                </ul>
+                                {% endif %}
+                                {% endfor %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- home section card end -->
+<!-- mid section card start -->
+<section class="mid_card mt-4">
+    <div class="section-heading text-center">
+        <h1 class="fw-bold pt-3">Best Itineraries</h1>
+    </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 justify-content-center align-items-center">
+            {% for i in all %}
+            <div class="col mt-5">
+                <div class="card" style="width: auto; position: relative;">
+                    <span class="position-absolute package">{{i.package}}</span>
+                    <div class="card_img">
+                        <img src="{{i.image.url}}" alt="..."> {% for list in image %} {% if list.post.id == i.id %}
+                        <img src="{{list.image.url}}" alt="..."> {% endif %} {% endfor %}
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title custm_bg text-light px-2 py-1">{{i.name}}</h4>
+                        <div class="card-text card_star px-3 py-2">
+                            <div class="rating-star">
+								<span>
+									<span>
+                                        <i class="{% if i.rating == "0.5" %}fa fa-star-half-alt {% elif i.rating < "1" %}far fa-star {% else %} fa fa-star {% endif %}" aria-hidden="true"></i>
+                                        <i class="{% if i.rating == "1.5" %}fa fa-star-half-alt {% elif i.rating < "2" %}far fa-star {% else %} fa fa-star {% endif %}" aria-hidden="true"></i>
+                                        <i class="{% if i.rating == "2.5" %}fa fa-star-half-alt {% elif i.rating < "3" %}far fa-star {% else %} fa fa-star {% endif %}" aria-hidden="true"></i>
+                                        <i class="{% if i.rating == "3.5" %}fa fa-star-half-alt {% elif i.rating < "4" %}far fa-star {% else %} fa fa-star {% endif %}" aria-hidden="true"></i>
+                                        <i class="{% if i.rating == "4.5" %}fa fa-star-half-alt {% elif i.rating < "5" %}far fa-star {% else %} fa fa-star {% endif %}" aria-hidden="true"></i>
+                                    </span>
+								</span>
+							</div>
+                        </div>
+                        <p class="card-text hm_card_text px-3">{{i.small_description}}</p>
+                        <div class="arrow_btn d-flex justify-content-end">
+                            <a href="{{i.get_url}}" class="btn custm_bg2 "><i class="fa-solid fa-arrow-right-long"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+<!-- mid section card end -->
+<!-- owel carousel start -->
+<section class="scroll_cards pb-5">
+    <div class="section-heading text-center">
+        <h1 class=" my-5 fw-bold">Top Rated Itineraries</h1>
+    </div>
+    <div class="container">
+        <div class="owl-carousel owl-theme">
+            {% for i in top %} {% if i.rating >= '3' %}
+            <div class="card  bg-dark text-white">
+                <a href="{{i.get_url}}" class="text-decoration-none">
+                    <img src="{{i.image.url}}" class="card-img" alt="...">
+                    <div class="card-img-overlay ">
+                        <h4 class="card-title card_hover dark_card text-center">
+                            <p class="city text_clr2">{{i.name}}</p>
+                            <p class="fs-6 days text_clr2">{{i.currency_code}} : {{i.price}}</p>
+                        </h4>
+                    </div>
+                    <div class="page_detail_btn p-2  d-flex justify-content-between align-items-center">
+                        <p class=" m-0 text-white">View Itinerary</p>
+                        <i class="fa-solid fa-arrow-right-long text-white"></i>
+                    </div>
+                </a>
+            </div>
+            {% endif %} {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endblock content %}

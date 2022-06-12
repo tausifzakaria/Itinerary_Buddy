@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* overflow-x: hidden; */
+}
+
+
+/* topbar start */
+
+section.topbar {
+    background: #14B77E;
+}
+
+.topbar a,
+i {
+    color: rgb(24, 24, 97);
+}
+
+.topbar .dropdown-toggle::after {
+    color: white;
+}
+
+
+/* topbar end */
+
+
+/* navbar start */
+
+.line-height {
+    line-height: 1;
+}
+
+nav.navbar {
+    background: #fff !important;
+}
+
+.navbar-brand {
+    font-size: 18px;
+}
+
+
+/* navbar end */
+
+
+/* carousel start */
+
+.carousel-caption {
+    /* bottom: 200px; */
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.slider-btn button {
+    padding: 1% 3% !important;
+    color: #fff;
+    background: transparent !important;
+    border: 2px solid #14B77E !important;
+    border-radius: 30px;
+}
+
+.slider-btn button:hover {
+    background: #14B77E !important;
+    color: rgb(44, 44, 171);
+    transition: all 0.5s;
+}
+
+
+/* carousel end */
+
+
+/* accordian start */
+
+.accordian_part a {
+    text-decoration: none;
+    color: black;
+}
+
+.accordian_part .active {
+    color: #14B77E !important;
+}
+
+
+/* accordian end */
+
+
+/* profile & table part start */
+
+.profile {
+    background: rgb(214, 212, 212);
+}
+
+.profile i {
+    color: rgb(142, 142, 142);
+    font-size: 150px;
+}
+
+.profile h5 {
+    color: rgb(44, 44, 171);
+}
+
+.profile h3 {
+    line-height: 10px !important;
+    color: rgb(44, 44, 171);
+    margin-bottom: 20%;
+}
+
+.profile_buttons a {
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #000;
+}
+
+.my_profile {
+    background: rgb(230, 228, 227);
+}
+
+.order_history {
+    background: #14B77E;
+}
+
+.order_history a {
+    color: #fff;
+}
+
+.profile .image {
+    margin-top: 35%;
+}
+
+.bg_clr {
+    background: #999 !important;
+}
+
+.bg_color {
+    background: #ddd;
+}
+
+.row_data {
+    background: rgb(241, 237, 237);
+}
+
+.table_detail .dropdown a {
+    width: 200px;
+}
+
+.table_detail .dropdown-toggle::after {
+    margin-left: 75%;
+}
+
+.table_detail .heading {
+    color: #14B77E;
+}
+
+.heading h1 {
+    border-bottom: 2px solid #14B77E !important;
+}

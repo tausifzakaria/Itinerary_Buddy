@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% load static %} {% block title %} About {% endblock title %} {% block content %}
+<!-- image-section start -->
+<section>
+    <div class="about-img"><span class="about-txt">About us</span></div>
+</section>
+<!-- image-section end -->
+<!-- breadcrumb start  -->
+<section class="accordian_part">
+    <div class="container pt-3 d-flex justify-content-center align-items-center">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Order History</li> -->
+            </ol>
+        </nav>
+    </div>
+</section>
+<!-- breadcrumb end -->
+<!-- middle content start -->
+<section class="middle-main py-1">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+            <div class="col mt-3">
+                <div class="middle1 mt-5">
+                    <h5>Welcome to Itinerary Buddy</h5>
+                    <h4 class="txt-color">OUR SUCCESS <br> AND COMPANY HISTORY.</h4>
+                    <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque cumque repudiandae voluptatem molestiae vel eos at. Illum exercitationem fuga officiis libero suscipit commodi ratione, voluptates sequi magnam ex molestiae voluptate
+                        accusantium molestias, facere sit rerum vitae et hic, soluta quam incidunt minima mollitia nesciunt quod? Facilis dolorum culpa dignissimos ratione nihil accusantium architecto doloremque suscipit consequuntur tempora! Facere error
+                        repellat ullam saepe. Inventore facere placeat ducimus rem, beatae officiis exercitationem distinctio voluptas ad temporibus, laudantium impedit quibusdam illo deserunt explicabo numquam, ex accusantium labore velit? Doloremque
+                        quae, eius reprehenderit, corrupti voluptate possimus illum labore accusamus unde non perspiciatis ea provident.</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="middle2 ps-5">
+                    <img src="/static/images/Travelers-pana.png" class="img-fluid w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- middle content end -->
+{% endblock content %}
